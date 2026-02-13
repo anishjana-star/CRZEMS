@@ -1,0 +1,169 @@
+/* BeautifulCalendar.css */
+.beautiful-calendar-wrapper {
+    background: white;
+    padding: 1rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: center;
+}
+
+.beautiful-calendar {
+    width: 100%;
+    max-width: 100%;
+    background: transparent;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.125em;
+}
+
+/* Header */
+.react-calendar__navigation {
+    display: flex;
+    height: 44px;
+    margin-bottom: 1rem;
+}
+
+.react-calendar__navigation button {
+    min-width: 44px;
+    background: none;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e293b;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+    background-color: #f1f5f9;
+}
+
+/* Days of week */
+.react-calendar__month-view__weekdays {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+    padding: 0.5rem;
+}
+
+.react-calendar__month-view__weekdays__weekday abbr {
+    text-decoration: none;
+}
+
+/* Tiles (Days) */
+.react-calendar__tile {
+    max-width: 100%;
+    padding: 6px 0;
+    /* Adjusted padding */
+    background: none;
+    text-align: center;
+    line-height: 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s;
+    color: #334155;
+    height: 48px;
+    /* Fixed height for consistency */
+    display: flex;
+    flex-direction: column;
+    /* Stack date and dot */
+    align-items: center;
+    justify-content: flex-start;
+    /* Align date to top area */
+    position: relative;
+    /* For absolute positioning of dot if needed, or just flex flow */
+    gap: 4px;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+    background-color: #e2e8f0;
+    color: #0f172a;
+}
+
+/* Holiday Styling */
+/* Holiday Styling */
+/* Holiday Styling */
+.holiday-date {
+    background-color: transparent !important;
+    position: relative;
+    font-weight: 700;
+    /* Reduce padding on the tile itself to pull the circle up? */
+    /* Or negative margin on child */
+}
+
+.holiday-date abbr {
+    background-color: #10b981;
+    color: white;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: -6px auto 0 auto;
+    /* Pull up to align with normal text */
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+}
+
+/* Ensure holiday style doesn't override current selection if we want selection to be visible,
+   but user asked for green dot. If selected, usually we want to see selection.
+   We can let specificty decide or force it. Active usually has !important in this file.
+   Let's check below. Active has !important. 
+   So Active > Holiday. Perfect.
+*/
+
+.holiday-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    /* On top of text to catch hover */
+    cursor: pointer;
+    background: transparent;
+}
+
+/* To show tooltip, we can rely on the 'title' attribute or a custom CSS tooltip. 
+   The prompt said "hover in that green dot then a text will appear". 
+   The 'title' attribute on the div accomplishes this natively. 
+   If a custom styled tooltip is needed, we'd do it differently, 
+   but native title is quickest and reliable. */
+
+/* Active / Selected */
+.react-calendar__tile--now {
+    background: #eff6ff;
+    color: #3b82f6;
+    font-weight: 700;
+}
+
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+    background: #dbeafe;
+}
+
+.react-calendar__tile--active {
+    background: #3b82f6 !important;
+    color: white !important;
+    font-weight: 700;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.4);
+}
+
+.weekend-date {
+    color: #ef4444;
+}
+
+/* Remove default focus outline */
+.react-calendar__tile:focus {
+    outline: none;
+}

@@ -1,0 +1,297 @@
+/* EmployeeTasks.css */
+:root {
+  --primary-blue: #0D47A1;
+  --secondary-blue: #1565C0;
+  --accent-blue: #1E88E5;
+  --soft-bg: #F5F9FF;
+  --white: #FFFFFF;
+  --text-dark: #0D47A1;
+  --text-muted: #546E7A;
+  --border-color: #E3EAF3;
+  --success-green: #2E7D32;
+  --progress-blue: #1976D2;
+  --pending-orange: #EF6C00;
+}
+
+.employee-tasks-page {
+  padding: 1rem 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: var(--soft-bg);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.page-header h1 {
+  margin: 0;
+  color: var(--primary-blue);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.tabs-controls {
+  display: flex;
+  gap: 1rem;
+  background: white;
+  padding: 0.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.tab-btn {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: var(--primary-blue);
+  background: var(--soft-bg);
+}
+
+.tab-btn.active {
+  background: var(--primary-blue);
+  color: white;
+  box-shadow: 0 2px 4px rgba(13, 71, 161, 0.2);
+}
+
+/* Specific component overrides */
+.salary-section {
+  padding: 0 !important;
+  /* Remove padding as parent handles it */
+  min-height: auto !important;
+  /* Allow parent to control height */
+}
+
+/* Tasks Grid/Container */
+/*.employee-tasks h1 {
+  margin-bottom: 1.5rem;
+  color: var(--primary-blue);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}*/
+
+/* Tasks Grid/Container */
+/* Tasks Grid/Container */
+.tasks-container {
+  display: grid;
+  /*grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));*/
+  gap: 0.75rem;
+}
+
+/* Task Card Styling */
+.task-card {
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 0.75rem;
+  box-shadow: 0 4px 15px rgba(13, 71, 161, 0.05);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.task-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--accent-blue);
+  opacity: 0.5;
+}
+
+.task-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(13, 71, 161, 0.12);
+}
+
+/* Card Header */
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.task-header h3 {
+  margin: 0;
+  color: var(--primary-blue);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  flex: 1;
+  padding-right: 1rem;
+}
+
+/* Status Badge */
+.status-badge {
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+/* Description */
+.task-description {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+/* Metadata */
+.task-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.meta-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.meta-label {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.meta-value {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+/* Actions Section */
+.task-actions {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.task-actions label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--secondary-blue);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Custom Select Dropdown */
+.status-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 2px solid var(--border-color);
+  background-color: var(--white);
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%231565C0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+}
+
+.status-select:hover {
+  border-color: var(--secondary-blue);
+  background-color: var(--soft-bg);
+}
+
+.status-select:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 4px rgba(30, 136, 229, 0.15);
+}
+
+/* States */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.no-tasks {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--white);
+  border-radius: 16px;
+  border: 2px dashed var(--border-color);
+  color: var(--text-muted);
+}
+
+.no-tasks p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.error-message {
+  background-color: #FFEBEE;
+  color: #C62828;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  border-left: 4px solid #C62828;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .employee-tasks {
+    padding: 1rem;
+  }
+
+  .tasks-container {
+    grid-template-columns: 1fr;
+  }
+
+  .task-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}

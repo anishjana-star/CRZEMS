@@ -1,0 +1,419 @@
+/* LeaveList.css - EMS Leave History Dashboard */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Page Layout */
+.ems-page-container {
+    background: linear-gradient(135deg, #F4F8FC 0%, #F5F9FF 100%);
+    min-height: 100vh;
+    padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .ems-page-container {
+        padding: 3rem;
+    }
+}
+
+.ems-max-width {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+/* Header Section */
+.ems-header-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+@media (min-width: 768px) {
+    .ems-header-section {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+    }
+}
+
+.ems-page-title {
+    font-size: 1.875rem;
+    font-weight: 800;
+    color: #0D47A1;
+    background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.025em;
+}
+
+.ems-page-subtitle {
+    color: #64748B;
+    font-weight: 500;
+    margin-top: 0.25rem;
+    font-size: 1rem;
+}
+
+/* Primary Button */
+.ems-primary-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #1565C0 0%, #1E88E5 100%);
+    color: #FFFFFF;
+    padding: 0.75rem 1.5rem;
+    border-radius: 1rem;
+    font-weight: 700;
+    box-shadow: 0 10px 30px rgba(21, 101, 192, 0.3);
+    border: 1px solid rgba(21, 101, 192, 0.2);
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ems-primary-btn:hover {
+    background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%);
+    box-shadow: 0 15px 40px rgba(13, 71, 161, 0.4);
+    transform: translateY(-2px);
+}
+
+.ems-primary-btn:active {
+    transform: scale(0.98);
+}
+
+/* Loading Skeleton */
+.ems-loading-skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ems-skeleton-card {
+    height: 8rem;
+    background: #FFFFFF;
+    border-radius: 1.5rem;
+    border: 1px solid #E3EAF3;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Empty State */
+.ems-empty-state {
+    background: #FFFFFF;
+    border-radius: 2.5rem;
+    padding: 3rem;
+    text-align: center;
+    border: 1px solid #E3EAF3;
+    box-shadow: 0 20px 60px rgba(13, 71, 161, 0.08);
+}
+
+.ems-empty-icon {
+    width: 5rem;
+    height: 5rem;
+    background: #F5F9FF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.ems-empty-icon svg {
+    color: #CBD5E1;
+}
+
+.ems-empty-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1E293B;
+    margin-bottom: 0.5rem;
+}
+
+.ems-empty-subtitle {
+    color: #64748B;
+    font-weight: 500;
+    max-width: 24rem;
+    margin: 0 auto 2rem;
+    font-size: 0.95rem;
+}
+
+.ems-secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%);
+    color: #FFFFFF;
+    padding: 0.875rem 2rem;
+    border-radius: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(13, 71, 161, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ems-secondary-btn:hover {
+    box-shadow: 0 15px 40px rgba(13, 71, 161, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Leaves Grid */
+.ems-leaves-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+/* Leave Cards */
+.ems-leave-card {
+    background: #FFFFFF;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid #E3EAF3;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ems-leave-card:hover {
+    box-shadow: 0 20px 40px rgba(13, 71, 161, 0.12);
+    border-color: #1E88E5;
+    transform: translateY(-4px);
+}
+
+.ems-leave-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .ems-leave-content {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+/* Leave Info */
+.ems-leave-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.ems-leave-dates {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.ems-date-icon {
+    padding: 0.625rem;
+    background: #F5F9FF;
+    color: #94A3B8;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.ems-leave-card:hover .ems-date-icon {
+    background: rgba(30, 136, 229, 0.1);
+    color: #1E88E5;
+}
+
+.ems-date-range {
+    font-size: 1.125rem;
+    font-weight: 800;
+    color: #1E293B;
+}
+
+.ems-date-separator {
+    color: #CBD5E1;
+    margin: 0 0.5rem;
+    font-size: 0.875rem;
+}
+
+.ems-leave-reason {
+    color: #64748B;
+    font-size: 0.875rem;
+    font-style: italic;
+    margin-left: 0.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-width: 28rem;
+}
+
+/* Status Section */
+.ems-leave-status-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-end;
+}
+
+@media (min-width: 768px) {
+    .ems-leave-status-section {
+        align-items: flex-end;
+    }
+}
+
+.ems-status-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1px solid;
+}
+
+/* EMS Status Colors */
+.ems-status-approved {
+    background: rgba(16, 185, 129, 0.1) !important;
+    color: #059669 !important;
+    border-color: rgba(16, 185, 129, 0.2) !important;
+}
+
+.ems-status-declined {
+    background: rgba(239, 68, 68, 0.1) !important;
+    color: #DC2626 !important;
+    border-color: rgba(239, 68, 68, 0.2) !important;
+}
+
+.ems-status-pending {
+    background: rgba(245, 158, 11, 0.1) !important;
+    color: #D97706 !important;
+    border-color: rgba(245, 158, 11, 0.2) !important;
+}
+
+.ems-text-approved {
+    color: #059669 !important;
+}
+
+.ems-text-declined {
+    color: #DC2626 !important;
+}
+
+.ems-text-pending {
+    color: #D97706 !important;
+}
+
+.ems-border-approved {
+    border-color: rgba(16, 185, 129, 0.2) !important;
+}
+
+.ems-border-declined {
+    border-color: rgba(239, 68, 68, 0.2) !important;
+}
+
+.ems-border-pending {
+    border-color: rgba(245, 158, 11, 0.2) !important;
+}
+
+/* Metadata */
+.ems-leave-metadata {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: flex-end;
+}
+
+.ems-applied-date,
+.ems-reviewed-by {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+}
+
+.ems-applied-date {
+    color: #94A3B8;
+}
+
+.ems-reviewed-by {
+    color: rgba(30, 136, 229, 0.7);
+}
+
+/* Re-apply Section */
+.ems-reapply-section {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #F1F5F9;
+}
+
+.ems-reapply-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #1E88E5;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.ems-reapply-link:hover {
+    color: #1565C0;
+}
+
+/* Help Footer */
+.ems-help-section {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background: rgba(30, 136, 229, 0.04);
+    border-radius: 1rem;
+    border: 1px solid rgba(30, 136, 229, 0.1);
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.ems-help-icon {
+    padding: 0.5rem;
+    background: rgba(30, 136, 229, 0.2);
+    border-radius: 0.5rem;
+    color: #1E88E5;
+    flex-shrink: 0;
+}
+
+.ems-help-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #0D47A1;
+}
+
+.ems-help-text {
+    font-size: 0.75rem;
+    color: rgba(30, 136, 229, 0.7);
+    margin-top: 0.125rem;
+    line-height: 1.4;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .ems-page-title {
+        font-size: 1.5rem;
+    }
+
+    .ems-leave-card {
+        padding: 1.25rem;
+    }
+}

@@ -1,0 +1,216 @@
+@media print {
+    @page {
+        size: A4;
+        margin: 0;
+        /* Hide browser default headers/footers */
+    }
+
+    body {
+        margin: 1cm;
+        /* Content margin */
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+.salary-slip-container {
+    padding: 2rem 40px 40px 40px;
+    /* Reduced top padding (10 lines up approx) */
+    background: white;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 210mm;
+    /* Ensure it fits A4 width */
+    margin: 0 auto;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', serif;
+}
+
+/* New Top Header for Logo/Name */
+.company-header-top {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    /* ~1 line gap */
+}
+
+.header-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.company-logo {
+    height: 50px;
+    width: auto;
+}
+
+.company-name {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Info Strip (GSTIN ... Payslip Box) */
+.slip-header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.header-left {
+    text-align: left;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.payslip-box {
+    border: 1px solid #000;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 14px;
+    background: #f8f8f8;
+    white-space: nowrap;
+}
+
+/* General Utilities */
+.separator-line {
+    border: 0;
+    border-top: 1px solid #000;
+    margin: 1rem 0 2rem 0;
+}
+
+/* Employee Details Grid */
+.employee-details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 40px;
+    margin-bottom: 2rem;
+    font-size: 14px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.label-bold {
+    font-weight: bold;
+}
+
+/* Salary Table */
+.salary-table-container {
+    margin-bottom: 0;
+}
+
+.salary-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #000;
+    font-size: 14px;
+}
+
+.salary-table th,
+.salary-table td {
+    padding: 8px;
+    border: 1px solid #000;
+}
+
+.salary-table th {
+    background: #f0f0f0;
+    text-align: center;
+}
+
+.salary-table th.text-left {
+    text-align: left;
+}
+
+.salary-table th.text-right {
+    text-align: right;
+}
+
+.salary-table td.text-right {
+    text-align: right;
+}
+
+.total-row {
+    font-weight: bold;
+    background: #f0f0f0;
+}
+
+/* Footer Section */
+.footer-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 28rem;
+    /* Increased gap: ~15-22 lines (approx 440px) */
+}
+
+.director-sign-box {
+    text-align: center;
+    position: relative;
+    width: 200px;
+}
+
+.stamp-container {
+    position: absolute;
+    top: -60px;
+    left: 10px;
+    opacity: 0.8;
+    transform: rotate(-10deg);
+    pointer-events: none;
+}
+
+.stamp-placeholder {
+    width: 100px;
+    height: 100px;
+    border: 3px solid blue;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: blue;
+    font-weight: bold;
+    font-size: 10px;
+    text-align: center;
+}
+
+.signature-space {
+    margin-bottom: 5px;
+    height: 50px;
+}
+
+.director-name {
+    font-size: 14px;
+    font-weight: bold;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #000;
+}
+
+.director-title {
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 5px;
+}
+
+.net-pay-box {
+    border: 2px solid #000;
+    padding: 15px;
+    min-width: 300px;
+}

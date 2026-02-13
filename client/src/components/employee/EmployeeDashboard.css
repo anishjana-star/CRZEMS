@@ -1,0 +1,330 @@
+/* EmployeeDashboard.css */
+:root {
+  --primary-blue: #0D47A1;
+  --secondary-blue: #1565C0;
+  --accent-blue: #1E88E5;
+  --soft-bg: #F5F9FF;
+  --white: #FFFFFF;
+  --text-dark: #0D47A1;
+  --text-muted: #546E7A;
+  --border-color: #E3EAF3;
+  --success: #2E7D32;
+  --warning: #EF6C00;
+}
+
+.employee-dashboard {
+  padding: 1rem 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--soft-bg);
+  min-height: 100vh;
+}
+
+.employee-dashboard h1 {
+  margin-bottom: 1rem;
+  color: var(--primary-blue);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+/* Main 3-column grid for top row */
+.top-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Bottom full-width cards */
+.bottom-row .dashboard-card {
+  flex: none;
+  width: 100%;
+}
+
+.dashboard-card {
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 20px rgba(13, 71, 161, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(13, 71, 161, 0.12);
+}
+
+.dashboard-card h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--secondary-blue);
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.75rem;
+}
+
+/* Personal Info Items */
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.875rem 0;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-weight: 500;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.info-value {
+  color: var(--text-dark);
+  font-weight: 600;
+  background: var(--soft-bg);
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  text-align: right;
+  max-width: 65%;
+}
+
+/* Stats Card */
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.stat-item:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent-blue);
+}
+
+/* Time Tracking / Clock Status */
+.clock-status {
+  text-align: center;
+  padding: 1.5rem 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.status-text {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.clock-card iframe {
+  border: none;
+  display: block;
+  margin: 0 auto 1.5rem auto;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-clock-in,
+.btn-clock-out {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 600;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-clock-in {
+  background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
+  color: white;
+}
+
+.btn-clock-in:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(46, 125, 50, 0.3);
+}
+
+.btn-clock-out {
+  background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
+  color: white;
+}
+
+.btn-clock-out:hover:not(:disabled) {
+  background: linear-gradient(135deg, #c62828 0%, #b71c1c 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(198, 40, 40, 0.3);
+}
+
+.btn-clock-in:disabled,
+.btn-clock-out:disabled {
+  background: #CFD8DC;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Tasks List */
+.tasks-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-item {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: var(--soft-bg);
+  border-radius: 10px;
+  border-left: 4px solid var(--accent-blue);
+  transition: background-color 0.2s;
+}
+
+.task-item:hover {
+  background-color: #E8F4FD;
+}
+
+.task-title {
+  font-weight: 600;
+  color: var(--primary-blue);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.task-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.task-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.status-pending,
+.status-Pending {
+  background-color: #FFF3E0;
+  color: #EF6C00;
+  border: 1px solid #FFE0B2;
+}
+
+.status-in-progress,
+.status-In-Progress {
+  background-color: #E3F2FD;
+  color: #1976D2;
+  border: 1px solid #BBDEFB;
+}
+
+.status-completed,
+.status-Completed {
+  background-color: #E8F5E9;
+  color: #2E7D32;
+  border: 1px solid #C8E6C9;
+}
+
+.task-due {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.no-tasks {
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 2rem 0;
+  background: var(--soft-bg);
+  border-radius: 8px;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+
+.error-message {
+  background-color: #FFEBEE;
+  color: #C62828;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  border-left: 5px solid #C62828;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(198, 40, 40, 0.1);
+  font-weight: 500;
+}
+
+/* Responsive breakpoints - PERFECT 3-COLUMN ON LAPTOP/TABLET */
+@media (max-width: 1200px) {
+  .top-row {
+    grid-template-columns: 1fr 1fr 1fr;
+    /* Still 3 columns */
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .top-row {
+    grid-template-columns: 1fr 1fr 1fr;
+    /* Still 3 columns on tablets */
+    gap: 0.75rem;
+  }
+
+  .employee-dashboard {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-row {
+    grid-template-columns: 1fr;
+    /* Stack on mobile */
+    gap: 1.5rem;
+  }
+
+  .employee-dashboard h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}

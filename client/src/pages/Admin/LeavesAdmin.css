@@ -1,0 +1,481 @@
+/* LeavesAdmin.css - EMS Admin Dashboard */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Page Layout */
+.ems-admin-page {
+    background: linear-gradient(135deg, #F4F8FC 0%, #F5F9FF 100%);
+    min-height: 100vh;
+    padding: 1.5rem;
+    overflow-x: hidden;
+    /* Prevents scrollbar from the zoom hack */
+}
+
+@media (min-width: 768px) {
+    .ems-admin-page {
+        padding: 3rem;
+    }
+}
+
+.ems-admin-container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+/* 💻 LAPTOP 75% SCALING - CENTERED FIX */
+@media (min-width: 1025px) and (max-width: 1440px) {
+    .ems-admin-container {
+        transform: scale(0.75);
+        transform-origin: top center;
+        width: 133.33%;
+        /* 100% / 0.75 = 133.33% */
+
+        /* ✅ KEY FIX: This pulls the 133% width container back to exact center */
+        margin-left: -16.665%;
+
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+}
+
+/* Header Section */
+.ems-header-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .ems-header-section {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+}
+
+.ems-page-title {
+    font-size: 1.875rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.025em;
+    margin: 0;
+}
+
+.ems-page-subtitle {
+    color: #64748B;
+    font-weight: 500;
+    margin: 0.25rem 0 0 0;
+    font-size: 1rem;
+}
+
+/* Tab Navigation */
+.ems-tab-nav {
+    display: flex;
+    background: #FFFFFF;
+    padding: 0.25rem;
+    border-radius: 0.75rem;
+    border: 1px solid #E3EAF3;
+    box-shadow: 0 4px 20px rgba(13, 71, 161, 0.08);
+}
+
+.ems-tab-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    background: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: capitalize;
+}
+
+.ems-tab-active {
+    background: linear-gradient(135deg, #1565C0 0%, #1E88E5 100%);
+    color: #FFFFFF;
+    box-shadow: 0 8px 25px rgba(21, 101, 192, 0.3);
+}
+
+.ems-tab-inactive {
+    color: #64748B;
+}
+
+.ems-tab-inactive:hover {
+    background: rgba(30, 136, 229, 0.05);
+    color: #1E88E5;
+}
+
+/* Loading State */
+.ems-loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 2rem;
+    background: #FFFFFF;
+    border-radius: 1.5rem;
+    border: 1px solid #E3EAF3;
+    box-shadow: 0 4px 20px rgba(13, 71, 161, 0.08);
+}
+
+.ems-loading-state svg {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: #1E88E5;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+.ems-loading-state p {
+    color: #64748B;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+/* Leaves Grid */
+.ems-leaves-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+/* Leave Cards */
+.ems-leave-card {
+    background: #FFFFFF;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid #E3EAF3;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ems-leave-card:hover {
+    box-shadow: 0 20px 40px rgba(13, 71, 161, 0.12);
+    border-color: #1E88E5;
+    transform: translateY(-2px);
+}
+
+.ems-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+    .ems-card-content {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+/* Employee Info */
+.ems-employee-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.ems-avatar {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background: linear-gradient(135deg, #F5F9FF 0%, #E3EAF3 100%);
+    border-radius: 50%;
+    color: #94A3B8;
+}
+
+@media (min-width: 640px) {
+    .ems-avatar {
+        display: flex;
+    }
+}
+
+.ems-employee-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.25rem;
+}
+
+.ems-employee-name {
+    font-weight: 800;
+    font-size: 1.125rem;
+    color: #1E293B;
+    margin: 0;
+}
+
+.ems-employee-email {
+    color: #64748B;
+    font-size: 0.875rem;
+    margin: 0 0 0.75rem 0;
+}
+
+.ems-date-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.ems-date-range {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #1E88E5;
+    background: rgba(30, 136, 229, 0.1);
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.5rem;
+}
+
+.ems-date-range svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.ems-applied-date {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #64748B;
+    padding: 0.375rem 0.75rem;
+}
+
+.ems-applied-date svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.ems-applied-date span {
+    font-size: 0.75rem;
+}
+
+/* Status Badge */
+.ems-status-badge {
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    border: 1px solid;
+    text-transform: capitalize;
+}
+
+/* Status Colors */
+.ems-status-pending {
+    background: rgba(245, 158, 11, 0.1);
+    color: #D97706;
+    border-color: rgba(245, 158, 11, 0.2);
+}
+
+.ems-status-approved {
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+.ems-status-declined {
+    background: rgba(239, 68, 68, 0.1);
+    color: #DC2626;
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+/* Reason Section */
+.ems-reason-section {
+    flex: 1;
+    max-width: 28rem;
+    padding-left: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .ems-reason-section {
+        padding-left: 2rem;
+    }
+}
+
+.ems-reason-text {
+    color: #475569;
+    font-size: 0.875rem;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+/* Actions */
+.ems-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.ems-decline-btn,
+.ems-approve-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    font-size: 0.875rem;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.ems-decline-btn {
+    color: #DC2626;
+}
+
+.ems-decline-btn:hover:not(:disabled) {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.ems-approve-btn {
+    background: linear-gradient(135deg, #1565C0 0%, #1E88E5 100%);
+    color: #FFFFFF;
+    padding: 0.625rem 1.5rem;
+    box-shadow: 0 8px 25px rgba(21, 101, 192, 0.3);
+}
+
+.ems-approve-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%);
+    box-shadow: 0 12px 30px rgba(13, 71, 161, 0.4);
+    transform: scale(0.98);
+}
+
+.ems-approve-btn:disabled,
+.ems-decline-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.ems-processed-state {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #94A3B8;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+/* Empty State */
+.ems-empty-state {
+    text-align: center;
+    padding: 6rem 2rem;
+    background: #FFFFFF;
+    border-radius: 1.5rem;
+    border: 1px dashed #E3EAF3;
+}
+
+.ems-empty-icon {
+    display: inline-flex;
+    width: 4rem;
+    height: 4rem;
+    align-items: center;
+    justify-content: center;
+    background: #F5F9FF;
+    border-radius: 50%;
+    color: #94A3B8;
+    margin-bottom: 1rem;
+}
+
+.ems-empty-state h3 {
+    font-size: 1.125rem;
+    font-weight: 800;
+    color: #1E293B;
+    margin: 0 0 0.5rem 0;
+}
+
+.ems-empty-state p {
+    color: #64748B;
+    margin: 0;
+}
+
+/* Animations */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .ems-reason-section {
+        max-width: 100%;
+        padding-left: 0;
+        order: 3;
+        margin-top: 1rem;
+    }
+
+    .ems-actions {
+        order: 2;
+    }
+}
+
+@media (max-width: 640px) {
+    .ems-admin-page {
+        padding: 1rem;
+    }
+
+    .ems-leave-card {
+        padding: 1.25rem;
+    }
+}
+
+/* Accessibility */
+.ems-tab-btn:focus-visible,
+.ems-approve-btn:focus-visible,
+.ems-decline-btn:focus-visible {
+    outline: 2px solid #1E88E5;
+    outline-offset: 2px;
+}
+
+/* 🔵 NEW LAYOUT: Calendar Sidebar */
+.ems-content-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .ems-content-layout {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .ems-calendar-sidebar {
+        width: 350px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 2rem;
+    }
+
+    .ems-leaves-list {
+        flex: 1;
+        min-width: 0;
+        /* Prevents flex overflow */
+    }
+}
+
+/* Make calendar card-like */
+.ems-calendar-sidebar {
+    background: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px solid #E3EAF3;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}

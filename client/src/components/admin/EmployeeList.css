@@ -1,0 +1,313 @@
+/* 🔵 Core Blue & White Palette - Professional EMS Design */
+.employee-list {
+  background: #F4F8FC;
+  min-height: 100vh;
+  padding: 0.5rem 1rem;
+}
+
+/* 🔵 PAGE HEADER */
+.page-header {
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 12px rgba(13, 71, 161, 0.08);
+  border: 1px solid #E3EAF3;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  /* Allow wrapping on small screens */
+}
+
+.header-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0D47A1;
+  margin: 0 0 0.25rem 0;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.employee-count {
+  color: #1565C0;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* 🔵 SEARCH BAR STYLES */
+.search-container {
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  border: 1px solid #E3EAF3;
+  border-radius: 12px;
+  padding: 8px 16px;
+  box-shadow: 0 2px 6px rgba(13, 71, 161, 0.05);
+  transition: all 0.3s ease;
+  min-width: 250px;
+}
+
+.search-container:focus-within {
+  border-color: #1E88E5;
+  box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.1);
+}
+
+.search-icon {
+  font-size: 1.1rem;
+  color: #90CAF9;
+  margin-right: 8px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: #0D47A1;
+  width: 100%;
+  background: transparent;
+}
+
+.search-input::placeholder {
+  color: #90CAF9;
+}
+
+/* 🔵 PRIMARY BUTTON STYLES (Applies to Add Employee) */
+.btn-primary,
+.add-employee-btn {
+  background: linear-gradient(135deg, #1E88E5 0%, #1565C0 100%);
+  color: #FFFFFF;
+  border: none;
+
+  /* KEY CHANGE: Increased padding for bigger button feel */
+  padding: 14px 24px;
+  /* Slightly adjusted padding */
+
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(30, 136, 229, 0.3);
+
+  /* KEY CHANGE: Flexbox centering */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  /* Space between icon and text */
+
+  /* KEY CHANGE: Minimum width to ensure button looks substantial */
+  min-width: 160px;
+  /* Slightly reduced min-width to fit multiple buttons */
+  white-space: nowrap;
+}
+
+.btn-primary:hover:not(:disabled),
+.add-employee-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(30, 136, 229, 0.4);
+}
+
+.btn-primary:disabled,
+.add-employee-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
+/* 🔵 EMPTY STATE BUTTON */
+.empty-btn {
+  margin-top: 1.5rem;
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  min-width: 200px;
+}
+
+/* 🔵 LOADING & ERROR STATES */
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  flex-direction: column;
+}
+
+.loading-spinner {
+  color: #1565C0;
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 2rem;
+  background: rgba(21, 101, 192, 0.1);
+  border-radius: 12px;
+  border: 2px solid #E3EAF3;
+}
+
+.error-message {
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  border-left: 4px solid #dc2626;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+}
+
+.error-icon {
+  font-size: 1.3rem;
+}
+
+/* 🔵 EMPLOYEE GRID */
+.employee-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  margin-top: -0.5rem;
+}
+
+/* 🔵 EMPTY STATE */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #FFFFFF;
+  border-radius: 20px;
+  border: 2px dashed #E3EAF3;
+  box-shadow: 0 4px 20px rgba(13, 71, 161, 0.06);
+  margin: 2rem 0;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.empty-state h3 {
+  color: #0D47A1;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+}
+
+.empty-state p {
+  color: #1565C0;
+  font-size: 1.1rem;
+  margin: 0 0 2rem 0;
+}
+
+/* 🔵 RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+  .employee-grid {
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .header-content {
+    text-align: center;
+  }
+
+  .header-controls {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .search-container {
+    width: 100%;
+    max-width: none;
+  }
+
+  .add-employee-btn,
+  .btn-primary {
+    align-self: center;
+    width: 100%;
+    max-width: none;
+    /* Let them take full width on smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .employee-list {
+    padding: 0.25rem 0.5rem;
+  }
+
+  .page-title {
+    font-size: 1.75rem;
+  }
+
+  .employee-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* 🔵 SMOOTH ANIMATIONS */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-header,
+.employee-grid,
+.empty-state {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* 🔵 FOCUS STATES */
+.btn-primary:focus,
+.add-employee-btn:focus,
+.nav-link:focus,
+.search-container:focus-within {
+  outline: 2px solid #1E88E5;
+  outline-offset: 2px;
+}

@@ -1,0 +1,128 @@
+/* TimeGraph.css */
+
+.time-graph-container {
+    width: 100%;
+    height: 450px;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e2e8f0;
+    transition: box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.graph-scroll-wrapper {
+    flex: 1;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    /* Custom Scrollbar for better UX */
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+
+.graph-scroll-wrapper::-webkit-scrollbar {
+    height: 6px;
+}
+
+.graph-scroll-wrapper::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 3px;
+}
+
+.time-graph-container:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.time-graph-header {
+    margin-bottom: 1.5rem;
+    color: #1e3a8a;
+    /* Deep Blue */
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: left;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 1rem;
+}
+
+/* Tooltip Customization */
+.custom-tooltip {
+    background-color: rgba(255, 255, 255, 0.98);
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+}
+
+.tooltip-date {
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 0.25rem;
+}
+
+.tooltip-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+    color: #475569;
+}
+
+.tooltip-label {
+    font-weight: 500;
+}
+
+.tooltip-value {
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.tooltip-duration {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed #e2e8f0;
+    font-weight: 700;
+    color: #2563eb;
+    /* Bright Blue */
+    text-align: right;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .time-graph-container {
+        padding: 1rem;
+        height: 350px;
+        /* Slightly shorter on mobile */
+    }
+
+    .time-graph-header {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Blinking Animation for Active Shift */
+@keyframes blink-opacity {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.blinking-bar {
+    animation: blink-opacity 2s infinite ease-in-out;
+}

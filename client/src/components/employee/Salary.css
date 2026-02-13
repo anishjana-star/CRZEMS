@@ -1,0 +1,240 @@
+.salary-section {
+    padding: 20px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.salary-section h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #2c3e50;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+}
+
+/* Overview Card */
+.salary-overview-card {
+    background: linear-gradient(135deg, #2c3e50, #3498db);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.salary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.salary-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    opacity: 0.9;
+}
+
+.salary-amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.salary-meta {
+    display: flex;
+    gap: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.meta-item {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Grids */
+.salary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.salary-section-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.section-header h3 {
+    margin: 0;
+    color: #2d3748;
+    font-size: 1.1rem;
+}
+
+/* Payslips List */
+.payslips-list,
+.promotions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.payslip-item,
+.promotion-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s;
+}
+
+.payslip-item:hover,
+.promotion-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-color: #cbd5e1;
+}
+
+.payslip-info h4,
+.promotion-details h4 {
+    margin: 0 0 0.25rem 0;
+    color: #1a202c;
+    font-size: 1rem;
+}
+
+.payslip-date,
+.promotion-meta {
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+.view-payslip-btn {
+    padding: 0.5rem 1rem;
+    background-color: white;
+    color: #3b82f6;
+    border: 1px solid #3b82f6;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+}
+
+.view-payslip-btn:hover {
+    background-color: #eff6ff;
+}
+
+/* Promotion Specifics */
+.promotion-details {
+    width: 100%;
+}
+
+.promotion-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.promotion-reason {
+    margin: 0.5rem 0 0 0;
+    font-size: 0.9rem;
+    color: #4b5563;
+    font-style: italic;
+    padding-top: 0.5rem;
+    border-top: 1px dashed #e2e8f0;
+}
+
+/* Termination Section */
+.termination-section {
+    margin-top: 2rem;
+}
+
+.termination-card {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.termination-icon {
+    font-size: 2rem;
+}
+
+.termination-details h4 {
+    margin: 0 0 0.5rem 0;
+    color: #991b1b;
+    font-size: 1.1rem;
+}
+
+.termination-details p {
+    margin: 0.25rem 0;
+    color: #7f1d1d;
+}
+
+/* Empty States */
+.no-data {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    background: #f1f5f9;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+.no-data-container {
+    text-align: center;
+    padding: 2rem;
+    color: #64748b;
+    font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .salary-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .salary-amount {
+        font-size: 2rem;
+    }
+
+    .salary-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .promotion-meta {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .payslip-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .view-payslip-btn {
+        width: 100%;
+        text-align: center;
+    }
+}

@@ -1,0 +1,291 @@
+.salary-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3100;
+    backdrop-filter: blur(4px);
+}
+
+.salary-modal-content {
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+}
+
+.salary-modal-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8fafc;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.salary-modal-header h2 {
+    margin: 0;
+    color: #1e293b;
+    font-size: 1.5rem;
+}
+
+.header-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.print-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.print-btn:hover {
+    background-color: #2563eb;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.close-btn:hover {
+    background-color: #f1f5f9;
+    color: #ef4444;
+}
+
+/* Slip Preview - The printable part */
+.salary-slip-preview {
+    padding: 0;
+    background: #e2e8f0;
+    /* Gray background for contrast */
+    height: 70vh;
+    /* Fixed height for scroll */
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.preview-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: white;
+}
+
+.slip-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.company-info h1 {
+    margin: 0;
+    color: #3b82f6;
+    font-size: 1.8rem;
+}
+
+.company-info p {
+    margin: 0.25rem 0 0;
+    color: #64748b;
+}
+
+.slip-title h3 {
+    margin: 0;
+    background: #f1f5f9;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+    font-weight: 600;
+}
+
+.divider {
+    border: 0;
+    border-top: 2px solid #e2e8f0;
+    margin: 1.5rem 0;
+}
+
+.employee-details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem 3rem;
+    margin-bottom: 2rem;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.detail-item .label {
+    font-weight: 600;
+    color: #64748b;
+}
+
+.detail-item .value {
+    font-weight: 500;
+}
+
+.salary-table-container {
+    border: 1px solid #000;
+    margin-bottom: 2rem;
+}
+
+.salary-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.salary-table th,
+.salary-table td {
+    padding: 0.75rem 1rem;
+    border: 1px solid #000;
+    text-align: left;
+}
+
+.salary-table th {
+    background-color: #f8fafc;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+.amount-col {
+    text-align: right !important;
+    font-family: 'Consolas', monospace;
+}
+
+.total-row {
+    background-color: #f1f5f9;
+    font-weight: 700;
+}
+
+.net-pay-section {
+    text-align: right;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border: 2px solid #3b82f6;
+    border-radius: 8px;
+    float: right;
+    min-width: 300px;
+}
+
+.net-pay-label {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+}
+
+.net-pay-amount {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #3b82f6;
+}
+
+.net-pay-words {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+.slip-footer {
+    clear: both;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px dashed #cbd5e1;
+    text-align: center;
+}
+
+.computer-generated {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* ... existing styles ... */
+
+.company-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.company-info img {
+    height: 60px;
+    width: auto;
+}
+
+.company-info h1 {
+    margin: 0;
+    color: #3b82f6;
+    font-size: 1.8rem;
+    line-height: 1.2;
+}
+
+/* ... rest of styles ... */
+
+@media print {
+    /* React-to-print handles isolation, so we don't need to hide body * 
+       However, we do need to ensure the preview looks good. */
+
+    @page {
+        size: A4;
+        margin: 20mm;
+    }
+
+    body {
+        background: white;
+    }
+
+    .salary-slip-preview {
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        width: 100% !important;
+        position: static !important;
+        visibility: visible !important;
+        border: none !important;
+    }
+
+    /* Ensure colors print correctly */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* Hide UI elements that might have leaked in (though unlikely with react-to-print) */
+    .print-btn,
+    .close-btn,
+    .salary-modal-header {
+        display: none !important;
+    }
+}
