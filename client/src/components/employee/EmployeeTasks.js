@@ -9,6 +9,7 @@ const EmployeeTasks = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('tasks'); // Default tab
+  const [searchQuery, setSearchQuery] = useState(''); // Search State
 
   useEffect(() => {
     loadTasks();
@@ -59,71 +60,85 @@ const EmployeeTasks = () => {
       return <div className="loading">Loading tasks...</div>;
     }
 
-    if (tasks.length === 0) {
+    // Filter tasks based on search query
+    const filteredTasks = tasks.filter(task => {
+      if (!searchQuery) return true;
+      const query = searchQuery.toLowerCase();
+      return (
+        (task.title && task.title.toLowerCase().includes(query)) ||
+        (task.description && task.description.toLowerCase().includes(query)) ||
+        (task.role && task.role.toLowerCase().includes(query)) ||
+        (task.status && task.status.toLowerCase().includes(query))
+      );
+    });
+
+    if (filteredTasks.length === 0) {
       return (
         <div className="no-tasks">
-          <p>No tasks assigned to you yet.</p>
+          <p>{searchQuery ? `No tasks match "${searchQuery}"` : "No tasks assigned to you yet."}</p>
         </div>
       );
     }
 
     return (
-      <div className="tasks-container">
-        {tasks.map((task) => (
-          <div key={task._id} className="task-card">
-            <div className="task-header">
-              <h3>{task.title}</h3>
-              <span
-                className="status-badge"
-                style={{ backgroundColor: getStatusColor(task.status) }}
-              >
-                {task.status}
-              </span>
-            </div>
-
-            {task.description && (
-              <p className="task-description">{task.description}</p>
-            )}
-
-            <div className="task-meta">
-              <div className="meta-item">
-                <span className="meta-label">Assigned by:</span>
-                <span className="meta-value">
-                  {task.assignedBy?.name || 'Admin'}
+      <div className="ems-tasks-scroll-container">
+        <div className="tasks-container">
+          {filteredTasks.map((task) => (
+            <div key={task._id} className="task-card">
+              <div className="task-header">
+                <h3>{task.title}</h3>
+                <span
+                  className="status-badge"
+                  style={{ backgroundColor: getStatusColor(task.status) }}
+                >
+                  {task.status}
                 </span>
               </div>
-              {task.role && (
-                <div className="meta-item">
-                  <span className="meta-label">Role:</span>
-                  <span className="meta-value">{task.role}</span>
-                </div>
+
+              {task.description && (
+                <p className="task-description">{task.description}</p>
               )}
-              {task.dueDate && (
+
+              <div className="task-meta">
                 <div className="meta-item">
-                  <span className="meta-label">Due date:</span>
-                  <span className="meta-value">{formatDate(task.dueDate)}</span>
+                  <span className="meta-label">Assigned by:</span>
+                  <span className="meta-value">
+                    {task.assignedBy?.name || 'Admin'}
+                  </span>
                 </div>
-              )}
-              <div className="meta-item">
-                <span className="meta-label">Created:</span>
-                <span className="meta-value">{formatDate(task.createdAt)}</span>
+                {task.role && (
+                  <div className="meta-item">
+                    <span className="meta-label">Role:</span>
+                    <span className="meta-value">{task.role}</span>
+                  </div>
+                )}
+                {task.dueDate && (
+                  <div className="meta-item">
+                    <span className="meta-label">Due date:</span>
+                    <span className="meta-value">{formatDate(task.dueDate)}</span>
+                  </div>
+                )}
+                <div className="meta-item">
+                  <span className="meta-label">Created:</span>
+                  <span className="meta-value">{formatDate(task.createdAt)}</span>
+                </div>
+              </div>
+
+              <div className="task-actions">
+                <label>Update Status:</label>
+                <select
+                  value={task.status}
+                  onChange={(e) => handleStatusChange(task._id, e.target.value)}
+                  className="status-select"
+                >
+                  <option value="pending">Pending</option>
+                  <option value="in-progress">In Progress</option>
+                  <option value="completed">Completed</option>
+                </select>
               </div>
             </div>
-
-            <div className="task-actions">
-              <label>Update Status:</label>
-              <select
-                value={task.status}
-                onChange={(e) => handleStatusChange(task._id, e.target.value)}
-                className="status-select"
-              >
-                <option value="pending">Pending</option>
-                <option value="in-progress">In Progress</option>
-                <option value="completed">Completed</option>
-              </select>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     );
   };
@@ -132,19 +147,35 @@ const EmployeeTasks = () => {
     <div className="employee-tasks-page">
       <div className="page-header">
         <h1>{activeTab === 'tasks' ? 'My Tasks' : 'Salary & Career'}</h1>
-        <div className="tabs-controls">
-          <button
-            className={`tab-btn ${activeTab === 'tasks' ? 'active' : ''}`}
-            onClick={() => setActiveTab('tasks')}
-          >
-            My Tasks
-          </button>
-          <button
-            className={`tab-btn ${activeTab === 'salary' ? 'active' : ''}`}
-            onClick={() => setActiveTab('salary')}
-          >
-            Salary & Career
-          </button>
+
+        <div className="header-controls">
+          {activeTab === 'tasks' && (
+            <div className="search-container">
+              <span className="search-icon">🔍</span>
+              <input
+                type="text"
+                placeholder="Search tasks..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="search-input"
+              />
+            </div>
+          )}
+
+          <div className="tabs-controls">
+            <button
+              className={`tab-btn ${activeTab === 'tasks' ? 'active' : ''}`}
+              onClick={() => setActiveTab('tasks')}
+            >
+              My Tasks
+            </button>
+            <button
+              className={`tab-btn ${activeTab === 'salary' ? 'active' : ''}`}
+              onClick={() => setActiveTab('salary')}
+            >
+              Salary & Career
+            </button>
+          </div>
         </div>
       </div>
 

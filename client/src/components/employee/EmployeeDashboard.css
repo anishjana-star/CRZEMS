@@ -88,6 +88,9 @@
   font-weight: 500;
   color: var(--text-muted);
   font-size: 0.95rem;
+  flex-shrink: 0;
+  /* Prevent label from shrinking */
+  margin-right: 0.5rem;
 }
 
 .info-value {
@@ -96,10 +99,27 @@
   background: var(--soft-bg);
   padding: 0.25rem 0.75rem;
   border-radius: 6px;
-  word-break: break-word;
-  overflow-wrap: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-align: right;
-  max-width: 65%;
+  max-width: 70%;
+}
+
+.info-value.email-text {
+  font-size: 0.8rem;
+  /* Smaller font for email */
+  max-width: 100%;
+  /* Allow taking more space */
+  text-overflow: clip;
+  /* Try not to ellipsis if possible, relies on font scaling visually */
+}
+
+@media (max-width: 400px) {
+  .info-value.email-text {
+    font-size: 0.7rem;
+    /* Even smaller on tiny screens */
+  }
 }
 
 /* Stats Card */

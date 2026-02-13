@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../../logo.svg';
+import signature from '../../assets/signature.png';
 
 const PayslipView = ({ payroll, employee, onClose }) => {
     const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -150,14 +151,33 @@ const PayslipView = ({ payroll, employee, onClose }) => {
                         </table>
                     </div>
 
-                    {/* Net Pay */}
-                    <div style={{ textAlign: 'right', marginTop: '2rem', padding: '1.5rem', border: '2px solid #3b82f6', borderRadius: '8px', float: 'right', minWidth: '300px' }}>
-                        <div style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '0.5rem' }}>Net Salary Payable:</div>
-                        <div style={{ fontSize: '2rem', fontWeight: 800, color: '#3b82f6' }}>₹{payroll.netSalary.toLocaleString()}</div>
-                        <div style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '0.5rem', fontStyle: 'italic' }}>(In words: {convertNumberToWords(payroll.netSalary)})</div>
+                    {/* Footer: Signature & Net Pay */}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: '2rem' }}>
+
+                        {/* Director Signature Section */}
+                        <div style={{ textAlign: 'center', width: '200px' }}>
+                            <img
+                                src={signature}
+                                alt="Director Signature"
+                                style={{ width: '150px', height: 'auto', marginBottom: '5px' }}
+                            />
+                            <div style={{ fontSize: '14px', fontWeight: 'bold', borderTop: '1px solid #000', paddingTop: '5px' }}>
+                                Krishna Kant Jha
+                            </div>
+                            <div style={{ fontSize: '14px', fontWeight: 'bold', paddingTop: '5px' }}>
+                                Managing Director
+                            </div>
+                        </div>
+
+                        {/* Net Pay */}
+                        <div style={{ textAlign: 'right', padding: '1.5rem', border: '2px solid #3b82f6', borderRadius: '8px', minWidth: '300px' }}>
+                            <div style={{ fontSize: '0.9rem', color: '#64748b', marginBottom: '0.5rem' }}>Net Salary Payable:</div>
+                            <div style={{ fontSize: '2rem', fontWeight: 800, color: '#3b82f6' }}>₹{payroll.netSalary.toLocaleString()}</div>
+                            <div style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '0.5rem', fontStyle: 'italic' }}>(In words: {convertNumberToWords(payroll.netSalary)})</div>
+                        </div>
                     </div>
 
-                    <div style={{ clear: 'both', marginTop: '4rem', paddingTop: '2rem', borderTop: '1px dashed #cbd5e1', textAlign: 'center' }}>
+                    <div style={{ marginTop: '4rem', paddingTop: '2rem', borderTop: '1px dashed #cbd5e1', textAlign: 'center' }}>
                         <p style={{ color: '#94a3b8', fontSize: '0.85rem', margin: 0 }}>This is a computer-generated document and does not require a signature.</p>
                     </div>
 

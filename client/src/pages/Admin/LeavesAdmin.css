@@ -20,25 +20,33 @@
     }
 }
 
-.ems-admin-container {
-    max-width: 1280px;
-    margin: 0 auto;
-}
-
-/* 💻 LAPTOP 75% SCALING - CENTERED FIX */
+/* 💻 LAPTOP - CENTERED & SCALED (Consistent with other pages) */
 @media (min-width: 1025px) and (max-width: 1440px) {
     .ems-admin-container {
-        transform: scale(0.75);
+        /* Aligning with the 85% scale used in Tasks page for consistency */
+        transform: scale(0.85);
         transform-origin: top center;
-        width: 133.33%;
-        /* 100% / 0.75 = 133.33% */
+        width: 117.65%;
+        /* Compensate for 0.85 scale */
+        max-width: none;
+        /* Allow it to fill the scaled space */
 
-        /* ✅ KEY FIX: This pulls the 133% width container back to exact center */
-        margin-left: -16.665%;
+        /* Center the scaled element */
+        margin: 0 auto;
 
-        padding-left: 4rem;
-        padding-right: 4rem;
+        /* Adjust positioning if needed, but margin auto on a wider element might need flex parent */
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%) scale(0.85);
+        transform-origin: top center;
     }
+}
+
+/* Alternative: Pure Flex Centering on Parent if standard margin fails */
+.ems-admin-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Header Section */
@@ -467,7 +475,28 @@
     .ems-leaves-list {
         flex: 1;
         min-width: 0;
-        /* Prevents flex overflow */
+        /* Scrollable Box Logic */
+        max-height: 70vh;
+        overflow-y: auto;
+        padding-right: 0.5rem;
+    }
+
+    /* Custom Scrollbar for Leaves List */
+    .ems-leaves-list::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .ems-leaves-list::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .ems-leaves-list::-webkit-scrollbar-thumb {
+        background: #CBD5E1;
+        border-radius: 3px;
+    }
+
+    .ems-leaves-list::-webkit-scrollbar-thumb:hover {
+        background: #94A3B8;
     }
 }
 

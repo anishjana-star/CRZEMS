@@ -502,7 +502,6 @@ const paySalary = async (req, res) => {
                 </div>
                 <div class="content">
                     <p>Dear ${user.name},</p>
-                    <p>Congratulations and welcome to the team! We are thrilled to have you join us at <strong>CRZ ACADEMIC REVIEW PVT LTD</strong>.</p>
                     <p>Your salary slip for <strong>${monthYear}</strong> has been generated.</p>
                     
                     <p>Here is a summary of your earnings and deductions:</p>
@@ -538,7 +537,7 @@ const paySalary = async (req, res) => {
                     
                     <div class="footer">
                         Best regards,<br>
-                        Admin
+                        CRZ Admin
                     </div>
                 </div>
             </div>
@@ -549,7 +548,7 @@ const paySalary = async (req, res) => {
         await sendEmail({
           to: user.email,
           subject,
-          text: `Dear ${user.name},\n\nYour salary slip for ${monthYear} is generated. Net Pay: ₹${netSalary}. Please login to download the PDF.\n\nBest regards,\nAdmin`,
+          text: `Dear ${user.name},\n\nYour salary slip for ${monthYear} is generated. Net Pay: ₹${netSalary}. Please login to download the PDF.\n\nBest regards,\nCRZ Admin`,
           html
         });
         console.log(`Salary detail email sent to ${user.email}`);

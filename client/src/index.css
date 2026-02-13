@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 /* Basic overrides to keep compatibility with existing CSS */
+* {
+  box-sizing: border-box;
+}
+
 body {
   @apply bg-gray-50 text-gray-800;
   margin: 0;
@@ -11,6 +15,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  /* Prevent body horizontal scroll */
 }
 
 code {

@@ -6,6 +6,7 @@ import { formatCurrency } from '../../utils/format';
 import TimeGraph from '../../components/common/TimeGraph';
 import SalarySlipModal from '../../components/admin/SalarySlipModal';
 import PromotionModal from '../../components/admin/PromotionModal';
+import AttendanceModal from '../../components/admin/AttendanceModal';
 import './AdminEmployeeView.css';
 
 const AdminEmployeeView = () => {
@@ -30,6 +31,7 @@ const AdminEmployeeView = () => {
     const [showTerminate, setShowTerminate] = useState(false);
     const [terminationReason, setTerminationReason] = useState('');
     const [showPromotionModal, setShowPromotionModal] = useState(false);
+    const [showAttendanceModal, setShowAttendanceModal] = useState(false);
     const [updating, setUpdating] = useState(false);
 
     useEffect(() => {
@@ -220,6 +222,10 @@ const AdminEmployeeView = () => {
                                 ⚠️ Terminate
                             </button>
                         )}
+
+                        <button className="btn-action btn-attendance" style={{ backgroundColor: '#6366f1', color: 'white' }} onClick={() => setShowAttendanceModal(true)}>
+                            📅 Attendance
+                        </button>
                     </div>
 
                     {showTerminate && (
@@ -266,6 +272,13 @@ const AdminEmployeeView = () => {
                     employee={employee}
                     onClose={() => setShowPromotionModal(false)}
                     onPromote={handlePromote}
+                />
+            )}
+
+            {showAttendanceModal && (
+                <AttendanceModal
+                    employee={employee}
+                    onClose={() => setShowAttendanceModal(false)}
                 />
             )}
         </div>

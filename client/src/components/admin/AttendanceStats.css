@@ -29,6 +29,13 @@
 
     .stats-container {
         padding: 1rem;
+        margin-bottom: 1.5rem;
+        /* Width is auto by default, which is safer with padding/margins */
+    }
+
+    .chart-wrapper {
+        padding: 0.5rem;
+        margin-top: 1rem;
     }
 }
 
@@ -42,6 +49,7 @@
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s, box-shadow 0.2s;
     border: 1px solid transparent;
+    /* removed width: 100% since grid handles it or block flow handles it */
 }
 
 .stat-card:hover {

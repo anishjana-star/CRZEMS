@@ -33,10 +33,13 @@ const TaskList = () => {
     'Project Manager'
   ];
   const [error, setError] = useState('');
+  const [searchQuery, setSearchQuery] = useState(''); // Search State
 
   useEffect(() => {
     loadData();
   }, []);
+
+  // ... (keeping existing useEffects) ...
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -67,12 +70,28 @@ const TaskList = () => {
     }
   };
 
+  // Filter Tasks Logic
+  const filteredTasks = tasks.filter(task => {
+    if (!searchQuery) return true;
+    const query = searchQuery.toLowerCase();
+
+    return (
+      (task.title && task.title.toLowerCase().includes(query)) ||
+      (task.description && task.description.toLowerCase().includes(query)) ||
+      (task.assignedTo?.name && task.assignedTo.name.toLowerCase().includes(query)) ||
+      (task.role && task.role.toLowerCase().includes(query)) ||
+      (task.status && task.status.toLowerCase().includes(query))
+    );
+  });
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
+
+  // ... (keeping existing handlers) ...
 
   const handleMultiSelectChange = (employeeId) => {
     setFormData((prev) => {
@@ -141,53 +160,71 @@ const TaskList = () => {
     <div className="task-list">
       <div className="page-header">
         <h1>Task Management</h1>
-        <button onClick={() => setShowModal(true)} className="btn-primary">
-          Assign Task
-        </button>
+        <div className="header-controls">
+          <button onClick={() => setShowModal(true)} className="btn-primary">
+            Assign Task
+          </button>
+
+          {/* Search Input */}
+          <div className="search-container">
+            <span className="search-icon">🔍</span>
+            <input
+              type="text"
+              placeholder="Search tasks..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input"
+            />
+          </div>
+        </div>
       </div>
 
       {error && <div className="error-message">{error}</div>}
 
       <div className="tasks-container">
-        {tasks.length === 0 ? (
-          <p className="no-tasks">No tasks assigned yet.</p>
+        {filteredTasks.length === 0 ? (
+          <p className="no-tasks">
+            {searchQuery ? `No tasks found matching "${searchQuery}"` : "No tasks assigned yet."}
+          </p>
         ) : (
-          <div className="table-wrapper">
-            <table className="tasks-table">
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th>Assigned To</th>
-                  <th>Role</th>
-                  <th>Assigned By</th>
-                  <th>Status</th>
-                  <th>Due Date</th>
-                  <th>Created</th>
-                </tr>
-              </thead>
-              <tbody>
-                {tasks.map((task) => (
-                  <tr key={task._id}>
-                    <td>{task.title}</td>
-                    <td>{task.description || '-'}</td>
-                    <td>{task.assignedTo?.name || '-'}</td>
-                    <td>{task.role || '-'}</td>
-                    <td>{task.assignedBy?.name || '-'}</td>
-                    <td>
-                      <span
-                        className="status-badge"
-                        style={{ backgroundColor: getStatusColor(task.status) }}
-                      >
-                        {task.status}
-                      </span>
-                    </td>
-                    <td>{task.dueDate ? formatDate(task.dueDate) : '-'}</td>
-                    <td>{formatDate(task.createdAt)}</td>
+          <div className="ems-admin-scroll-container">
+            <div className="table-wrapper">
+              <table className="tasks-table">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Assigned To</th>
+                    <th>Role</th>
+                    <th>Assigned By</th>
+                    <th>Status</th>
+                    <th>Due Date</th>
+                    <th>Created</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {filteredTasks.map((task) => (
+                    <tr key={task._id}>
+                      <td>{task.title}</td>
+                      <td>{task.description || '-'}</td>
+                      <td>{task.assignedTo?.name || '-'}</td>
+                      <td>{task.role || '-'}</td>
+                      <td>{task.assignedBy?.name || '-'}</td>
+                      <td>
+                        <span
+                          className="status-badge"
+                          style={{ backgroundColor: getStatusColor(task.status) }}
+                        >
+                          {task.status}
+                        </span>
+                      </td>
+                      <td>{task.dueDate ? formatDate(task.dueDate) : '-'}</td>
+                      <td>{formatDate(task.createdAt)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
       </div>

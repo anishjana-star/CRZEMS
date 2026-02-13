@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getPayslip } from '../../services/employeeService';
 import logo from '../../logo.svg';
+import signature from '../../assets/signature.png';
 import './EmployeePayslipPrint.css';
 
 const EmployeePayslipPrint = () => {
@@ -155,20 +156,13 @@ const EmployeePayslipPrint = () => {
             <div className="footer-section">
 
                 {/* Director Signature Section */}
+                {/* Director Signature Section */}
                 <div className="director-sign-box">
-                    {/* Stamp */}
-                    <div className="stamp-container">
-                        {/* Placeholder for Stamp */}
-                        <div className="stamp-placeholder">
-                            CollegeReviewZ<br />Stamp
-                        </div>
-                    </div>
-
-                    {/* Signature Image Placeholder */}
-                    <div className="signature-space">
-                        <div style={{ fontFamily: 'Cursive, serif', fontSize: '20px', color: '#000' }}>Krishna Kant Jha</div>
-                    </div>
-
+                    <img
+                        src={signature}
+                        alt="Director Signature"
+                        style={{ width: '150px', height: 'auto', marginBottom: '5px' }}
+                    />
                     <div className="director-name">
                         Krishna Kant Jha
                     </div>

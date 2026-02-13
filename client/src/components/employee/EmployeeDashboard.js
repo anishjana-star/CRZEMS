@@ -114,7 +114,7 @@ const EmployeeDashboard = () => {
           </div>
           <div className="info-item">
             <span className="info-label">Email:</span>
-            <span className="info-value">{employee.email}</span>
+            <span className="info-value email-text">{employee.email}</span>
           </div>
           <div className="info-item">
             <span className="info-label">Salary:</span>
@@ -188,7 +188,7 @@ const EmployeeDashboard = () => {
           <h2>Recent Tasks</h2>
           {tasks && tasks.length > 0 ? (
             <ul className="tasks-list">
-              {tasks.slice(0, 5).map((task) => (
+              {tasks.slice(0, 2).map((task) => (
                 <li key={task._id} className="task-item">
                   <div className="task-title">{task.title}</div>
                   <div className="task-meta">

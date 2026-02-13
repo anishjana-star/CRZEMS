@@ -59,6 +59,38 @@
   margin: 0;
 }
 
+/* Scrollable Container Wrapper for Admin Tasks */
+.ems-admin-scroll-container {
+  max-height: 70vh;
+  overflow-y: auto;
+  background: #ffffff;
+  /* border: 1px solid #E3EAF3; - Border handled by tasks-container */
+  border-radius: 0 0 12px 12px;
+  /* Radius only at bottom to fit container */
+  padding: 0;
+  /* Padding handled by table */
+}
+
+/* Custom Scrollbar for the container */
+.ems-admin-scroll-container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.ems-admin-scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.ems-admin-scroll-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.ems-admin-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
 .table-wrapper {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -102,16 +134,22 @@
 }
 
 .btn-primary {
-  background: #1565C0;
+  background: linear-gradient(135deg, #1E88E5 0%, #1565C0 100%);
   color: #FFFFFF;
   border: none;
-  padding: 1.125rem 2.5rem;
-  border-radius: 8px;
+  padding: 14px 24px;
+  border-radius: 12px;
+  font-weight: 600;
   font-size: 1rem;
-  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
-  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(30, 136, 229, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 160px;
+  white-space: nowrap;
 }
 
 .btn-primary:hover {
@@ -284,7 +322,7 @@
   background: #FFFFFF;
   border: 1px solid #E3EAF3;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   max-height: 200px;
   overflow-y: auto;
   z-index: 100;

@@ -26,8 +26,24 @@ const getLogoBase64 = () => {
     }
 };
 
+// Read Signature Image
+const getSignatureBase64 = () => {
+    try {
+        const sigPath = path.resolve(__dirname, '../../client/src/assets/signature.png');
+        if (fs.existsSync(sigPath)) {
+            const sigBuffer = fs.readFileSync(sigPath);
+            return `data:image/png;base64,${sigBuffer.toString('base64')}`;
+        }
+        return '';
+    } catch (e) {
+        console.warn('Signature not found for PDF generation', e);
+        return '';
+    }
+};
+
 const generateSalarySlipPdf = async ({ employee, payroll }) => {
     const logoBase64 = getLogoBase64();
+    const signatureBase64 = getSignatureBase64();
 
     // CSS content from SalarySlipPrint.css
     const css = `
@@ -175,17 +191,18 @@ const generateSalarySlipPdf = async ({ employee, payroll }) => {
 
                 <!-- Director Signature Section -->
                 <div class="director-sign-box">
-                    <!-- Stamp -->
-                    <div class="stamp-container">
-                        <div class="stamp-placeholder">
-                            CollegeReviewZ<br />Stamp
+                    ${signatureBase64 ?
+            `<img src="${signatureBase64}" alt="Director Signature" style="width: 150px; height: auto; margin-bottom: 5px;" />` :
+            `<!-- Fallback if image missing -->
+                        <div class="stamp-container">
+                            <div class="stamp-placeholder">
+                                CollegeReviewZ<br />Stamp
+                            </div>
                         </div>
-                    </div>
-
-                    <!-- Signature Placeholder -->
-                    <div class="signature-space">
-                        <div style="font-family: 'Cursive', serif; font-size: 20px; color: #000;">Krishna Kant Jha</div>
-                    </div>
+                        <div class="signature-space">
+                            <div style="font-family: 'Cursive', serif; font-size: 20px; color: #000;">Krishna Kant Jha</div>
+                        </div>`
+        }
 
                     <div class="director-name">Krishna Kant Jha</div>
                     <div class="director-title">Managing Director</div>
