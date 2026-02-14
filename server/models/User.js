@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
+// import bcrypt from 'bcryptjs'; // Removed for plain text passwords
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -63,16 +63,16 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-// Hash password before saving
+// Hash password before saving - REMOVED for plain text
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
-  this.password = await bcrypt.hash(this.password, 10);
+  // this.password = await bcrypt.hash(this.password, 10); // Hashing removed
   next();
 });
 
-// Compare password method
+// Compare password method - Plain text comparison
 userSchema.methods.comparePassword = async function (candidatePassword) {
-  return await bcrypt.compare(candidatePassword, this.password);
+  return candidatePassword === this.password;
 };
 
 export default mongoose.model('User', userSchema);

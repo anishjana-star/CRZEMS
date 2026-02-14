@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
+// import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 import User from '../models/User.js';
 
@@ -17,7 +17,7 @@ const resetAdmin = async () => {
 
     // Find or create admin user
     let admin = await User.findOne({ email: 'admin@example.com' });
-    
+
     if (admin) {
       console.log('Admin user found. Resetting password...');
       // Set plain password - pre-save hook will hash it
@@ -38,7 +38,7 @@ const resetAdmin = async () => {
       await admin.save();
       console.log('✅ Admin user created successfully!');
     }
-    
+
     // Reload admin to get the hashed password from DB
     admin = await User.findOne({ email: 'admin@example.com' });
 
