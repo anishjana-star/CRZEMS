@@ -1,4 +1,5 @@
 import path from 'path';
+// this is for the testing
 import fs from 'fs';
 import PDFDocument from 'pdfkit';
 import { sendEmail } from '../utils/email.js';
