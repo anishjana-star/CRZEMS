@@ -2,12 +2,14 @@
 .employee-card-new {
   background: #FFFFFF;
   border-radius: 12px;
-  padding: 24px;
+  padding: 16px;
+  /* Reduced from 24px */
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   border: 1px solid #E5E7EB;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
+  /* Reduced from 20px */
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -20,71 +22,95 @@
 .card-header-new {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
+  /* Reduced from 4px */
 }
 
 .card-header-new h3 {
   margin: 0;
-  font-size: 1.125rem;
-  /* 18px */
+  font-size: 1rem;
+  /* Slightly smaller - Reduced from 1.125rem */
   font-weight: 700;
   color: #111827;
-  /* Dark Gray/Black */
 }
 
 .employee-email {
   margin: 0;
-  font-size: 0.875rem;
-  /* 14px */
+  font-size: 0.8rem;
+  /* Reduced from 0.875rem */
   color: #3B82F6;
-  /* Blue-500 */
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+  /* Reduced from 0.5rem */
+}
+
+.employee-type-badge {
+  font-size: 0.7rem;
+  /* Reduced from 0.75rem */
+  background-color: #d1fae5;
+  color: #065f46;
+  padding: 0.2rem 0.4rem;
+  border-radius: 9999px;
+  border: 1px solid #a7f3d0;
+  white-space: nowrap;
+  font-weight: 500;
 }
 
 .status-badge.terminated {
   align-self: flex-start;
   background-color: #FEE2E2;
   color: #991B1B;
-  padding: 2px 8px;
+  padding: 2px 6px;
   border-radius: 4px;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 /* Body & Inputs */
 .card-body-new {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
+  /* Reduced from 16px */
 }
 
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
+  /* Reduced from 6px */
 }
 
 .input-group label {
-  font-size: 0.875rem;
+  font-size: 0.8rem;
+  /* Reduced from 0.875rem */
   font-weight: 600;
   color: #1F2937;
-  /* Gray-800 */
 }
 
 .input-row {
   display: flex;
-  gap: 8px;
+  gap: 6px;
+  /* Reduced from 8px */
   flex-wrap: wrap;
 }
 
 .input-row input {
   flex: 1;
-  padding: 8px 12px;
+  padding: 6px 10px;
+  /* Reduced padding */
   border: 1px solid #D1D5DB;
   border-radius: 6px;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  /* Reduced font size */
   color: #374151;
-  min-width: 120px;
+  min-width: 100px;
 }
 
 .input-row input:focus {
@@ -94,7 +120,8 @@
 }
 
 .btn-update {
-  padding: 8px 16px;
+  padding: 6px 12px;
+  /* Reduced from 8px 16px */
   background-color: white;
   color: #1E88E5;
   border: 1px solid #1E88E5;
@@ -103,6 +130,8 @@
   cursor: pointer;
   transition: all 0.2s;
   white-space: nowrap;
+  font-size: 0.85rem;
+  /* Slightly smaller text */
 }
 
 .btn-update:hover:not(:disabled) {
@@ -117,32 +146,34 @@
 }
 
 .current-val {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
+  /* Reduced from 0.75rem */
   color: #6B7280;
-  /* Gray-500 */
 }
 
 /* Footer & Actions */
 .card-footer-new {
   margin-top: auto;
-  padding-top: 16px;
+  padding-top: 10px;
+  /* Reduced from 16px */
 }
 
 .btn-manage {
   width: 100%;
   background-color: #1D4ED8;
-  /* Blue-700 similar to header button */
   color: white;
   border: none;
-  padding: 10px;
+  padding: 8px;
+  /* Reduced from 10px */
   border-radius: 6px;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  /* Reduced from 0.9rem */
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   transition: background-color 0.2s;
 }
 

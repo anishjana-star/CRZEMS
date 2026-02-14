@@ -17,6 +17,7 @@ const Salary = () => {
     const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
     const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
     const [searchTerm, setSearchTerm] = useState('');
+    const [payslipError, setPayslipError] = useState('');
 
     useEffect(() => {
         loadSalaryData();
@@ -63,7 +64,19 @@ const Salary = () => {
     };
 
     const handleCheckPayslip = () => {
-        handlePrint(selectedMonth, selectedYear);
+        // Check if payslip exists for selected month/year
+        const exists = salaryData.payslips.some(p => {
+            const d = new Date(p.month);
+            // Javascript months are 0-indexed, so getMonth() + 1 matches our selectedMonth (1-12)
+            return (d.getMonth() + 1) === parseInt(selectedMonth) && d.getFullYear() === parseInt(selectedYear);
+        });
+
+        if (exists) {
+            setPayslipError('');
+            handlePrint(selectedMonth, selectedYear);
+        } else {
+            setPayslipError('Not found');
+        }
     };
 
     const formatPayslipName = (payslip) => payslip.name || '';
@@ -139,6 +152,11 @@ const Salary = () => {
                         View Payslip
                     </button>
                     {/* Error handling removed as we open in new tab now */}
+                    {payslipError && (
+                        <span style={{ color: '#dc2626', fontWeight: '500', marginLeft: '10px' }}>
+                            {payslipError}
+                        </span>
+                    )}
                 </div>
             </div>
 
@@ -210,7 +228,6 @@ const Salary = () => {
                                         <h4>{promotion.title}</h4>
                                         <div className="promotion-meta">
                                             <span>Date: {formatDate(promotion.date)}</span>
-                                            <span>Salary: ₹{promotion.newSalary?.toLocaleString()}</span>
                                             {promotion.position && (
                                                 <span>Position: {promotion.position}</span>
                                             )}

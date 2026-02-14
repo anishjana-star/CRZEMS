@@ -11,6 +11,7 @@ const EmployeeDashboard = () => {
   const [error, setError] = useState('');
   const [clocking, setClocking] = useState(false);
   const [isClockedIn, setIsClockedIn] = useState(false);
+  const [showSalary, setShowSalary] = useState(false);
 
   // Graph state
   const [graphEntries, setGraphEntries] = useState([]);
@@ -117,8 +118,23 @@ const EmployeeDashboard = () => {
             <span className="info-value email-text">{employee.email}</span>
           </div>
           <div className="info-item">
+            <span className="info-label">Employee Type:</span>
+            <span className="info-value">{employee.employeeType || 'Full Time'}</span>
+          </div>
+          <div className="info-item">
             <span className="info-label">Salary:</span>
-            <span className="info-value">{formatCurrency(employee.salary)}</span>
+            <div className="salary-value-container">
+              <span className="info-value">
+                {showSalary ? formatCurrency(employee.salary) : '••••••'}
+              </span>
+              <button
+                className="toggle-salary-btn"
+                onClick={() => setShowSalary(!showSalary)}
+                title={showSalary ? "Hide Salary" : "Show Salary"}
+              >
+                {showSalary ? '👁️' : '👁️‍🗨️'}
+              </button>
+            </div>
           </div>
           <div className="info-item">
             <span className="info-label">Work Hours/Day:</span>

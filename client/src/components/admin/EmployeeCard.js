@@ -33,7 +33,10 @@ const EmployeeCard = ({ employee, onUpdate }) => {
   return (
     <div className="employee-card-new">
       <div className="card-header-new">
-        <h3>{employee.name}</h3>
+        <div className="header-top">
+          <h3>{employee.name}</h3>
+          <span className="employee-type-badge">{employee.employeeType || 'Full Time'}</span>
+        </div>
         <p className="employee-email">{employee.email}</p>
         {employee.status === 'terminated' && (
           <span className="status-badge terminated">Terminated</span>
@@ -89,7 +92,7 @@ const EmployeeCard = ({ employee, onUpdate }) => {
           className="btn-manage"
           onClick={() => navigate(`/admin/employees/${employee._id}`)}
         >
-          Manage Employee & View Details
+          Manage & View Details
         </button>
       </div>
     </div>

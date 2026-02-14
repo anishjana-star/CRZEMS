@@ -152,7 +152,7 @@ const terminateEmployee = async (userId, reason) => {
   return { id: user._id, email: user.email, status: user.status };
 };
 
-const promoteEmployee = async (userId, newDesignation, promotedBy) => {
+const promoteEmployee = async (userId, newDesignation, promotedBy, remarks) => {
   if (!newDesignation) throw new Error('New designation is required');
 
   const user = await User.findById(userId);
@@ -162,7 +162,9 @@ const promoteEmployee = async (userId, newDesignation, promotedBy) => {
   user.promotionHistory.push({
     designation: user.designation,
     date: new Date(),
-    promotedBy
+    promotedBy,
+    promotionTitle: `Promoted to "${newDesignation}"`, // Save formatted title
+    remarks: remarks || ''
   });
 
   user.designation = newDesignation;
