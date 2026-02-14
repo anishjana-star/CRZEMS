@@ -6,7 +6,7 @@ let socket = null;
 export const connectSocket = (opts = {}) => {
   if (socket) return socket;
   const token = getToken();
-  const url = process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL.replace('/api', '') : 'http://localhost:5000';
+  const url = process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL.replace('/api', '') : (process.env.NODE_ENV === 'production' ? '/' : 'http://localhost:5000');
 
   socket = ioClient(url, {
     auth: { token },
