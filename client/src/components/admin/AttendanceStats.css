@@ -57,6 +57,15 @@
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
+.stat-card.clickable {
+    cursor: pointer;
+}
+
+.stat-card.clickable:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.15);
+}
+
 .stat-card.total {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
     border-color: #cbd5e1;

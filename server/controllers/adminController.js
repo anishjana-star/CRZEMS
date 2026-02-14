@@ -388,9 +388,11 @@ const getAttendanceStats = async (req, res) => {
 
     // Daily Stats
     const totalEmployees = await User.countDocuments({ role: 'employee', status: 'active' });
-    const presentToday = await TimeEntry.distinct('employeeId', {
+    const presentEntries = await TimeEntry.find({
       date: { $gte: today, $lt: tomorrow }
-    });
+    }).select('employeeId');
+
+    const presentEmployeeIds = [...new Set(presentEntries.map(entry => entry.employeeId.toString()))];
 
     // Monthly Stats (Current Month)
     const currentMonth = today.getMonth() + 1; // 1-12
@@ -422,13 +424,32 @@ const getAttendanceStats = async (req, res) => {
       { $sort: { day: 1 } }
     ]);
 
+    // Employee Monthly Stats for filtering/sorting
+    // Group by employee to count days present
+    const employeeMonthlyStats = await TimeEntry.aggregate([
+      {
+        $match: {
+          month: currentMonth,
+          year: currentYear
+        }
+      },
+      {
+        $group: {
+          _id: "$employeeId",
+          daysPresent: { $sum: 1 }
+        }
+      }
+    ]);
+
     res.json({
       daily: {
         total: totalEmployees,
-        present: presentToday.length,
-        absent: totalEmployees - presentToday.length
+        present: presentEmployeeIds.length,
+        absent: totalEmployees - presentEmployeeIds.length,
+        presentEmployeeIds // New field
       },
-      monthly: monthlyStats
+      monthly: monthlyStats,
+      employeeStats: employeeMonthlyStats // New field: [{ _id: 'employeeId', daysPresent: 5 }, ...]
     });
 
   } catch (error) {

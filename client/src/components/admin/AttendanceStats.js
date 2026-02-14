@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getAttendanceStats } from '../../services/adminService';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import './AttendanceStats.css';
@@ -22,6 +23,12 @@ const AttendanceStats = () => {
         }
     };
 
+    const navigate = useNavigate();
+
+    const handleCardClick = (filterType) => {
+        navigate('/admin/employees', { state: { filter: filterType } });
+    };
+
     if (loading) return <div>Loading Stats...</div>;
     if (!stats) return <div>No stats available.</div>;
 
@@ -30,15 +37,27 @@ const AttendanceStats = () => {
             <div className="daily-stats">
                 <h3>Today's Attendance</h3>
                 <div className="stats-cards">
-                    <div className="stat-card total">
+                    <div
+                        className="stat-card total clickable"
+                        onClick={() => handleCardClick('all')}
+                        title="View All Employees"
+                    >
                         <span className="label">Total Employees</span>
                         <span className="value">{stats.daily.total}</span>
                     </div>
-                    <div className="stat-card present">
+                    <div
+                        className="stat-card present clickable"
+                        onClick={() => handleCardClick('present')}
+                        title="View Present Employees"
+                    >
                         <span className="label">Present</span>
                         <span className="value">{stats.daily.present}</span>
                     </div>
-                    <div className="stat-card absent">
+                    <div
+                        className="stat-card absent clickable"
+                        onClick={() => handleCardClick('absent')}
+                        title="View Absent Employees"
+                    >
                         <span className="label">Absent</span>
                         <span className="value">{stats.daily.absent}</span>
                     </div>

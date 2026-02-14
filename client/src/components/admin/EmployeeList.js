@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { getAllEmployees } from '../../services/adminService';
+import { useLocation } from 'react-router-dom';
+import { getAllEmployees, getAttendanceStats } from '../../services/adminService';
 import EmployeeCard from './EmployeeCard';
 import CreateEmployeeModal from './CreateEmployeeModal';
 import './EmployeeList.css';
 
+
 const EmployeeList = () => {
+  const location = useLocation();
   const [employees, setEmployees] = useState([]);
   const [filteredEmployees, setFilteredEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,30 +15,54 @@ const EmployeeList = () => {
   const [error, setError] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
 
+  // New State for Filtering
+  const [attendanceData, setAttendanceData] = useState(null);
+  const [activeFilter, setActiveFilter] = useState('all'); // 'all', 'present', 'absent'
+
   // Payroll State
   const [payrollStatus, setPayrollStatus] = useState({});
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
   useEffect(() => {
-    loadEmployees();
-    loadPayrollStatus();
-  }, [currentMonth, currentYear]); // Reload when month/year changes
+    // Check for navigation state filter
+    if (location.state?.filter) {
+      setActiveFilter(location.state.filter);
+      // Clear state so refresh doesn't stick? Or keep it? keeping is fine.
+    }
+  }, [location.state]);
 
   useEffect(() => {
+    const init = async () => {
+      setLoading(true);
+      await Promise.all([loadEmployees(), loadAttendanceData(), loadPayrollStatus()]);
+      setLoading(false);
+    };
+    init();
+  }, [currentMonth, currentYear]);
+
+  // Re-run filter when these change
+  useEffect(() => {
     filterEmployees();
-  }, [searchQuery, employees]);
+  }, [searchQuery, employees, activeFilter, attendanceData]);
+
+  const loadAttendanceData = async () => {
+    try {
+      const stats = await getAttendanceStats();
+      setAttendanceData(stats);
+    } catch (err) {
+      console.error("Failed to load attendance stats", err);
+    }
+  };
 
   const loadEmployees = async () => {
     try {
-      setLoading(true);
+      // setLoading(true); // Handled in init
       const data = await getAllEmployees();
       setEmployees(data);
-      setFilteredEmployees(data);
+      // setFilteredEmployees(data); // Handled in filterEmployees
     } catch (err) {
       setError(err.message);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -57,20 +84,48 @@ const EmployeeList = () => {
   };
 
   const filterEmployees = () => {
-    if (!searchQuery.trim()) {
-      setFilteredEmployees(employees);
-      return;
+    let result = [...employees];
+
+    // 1. Apply Dashboard Filter (Present/Absent)
+    if (activeFilter !== 'all' && attendanceData) {
+      const presentIds = new Set(attendanceData.daily.presentEmployeeIds);
+
+      if (activeFilter === 'present') {
+        result = result.filter(emp => presentIds.has(emp._id));
+      } else if (activeFilter === 'absent') {
+        result = result.filter(emp => !presentIds.has(emp._id));
+
+        // Sort by Highest Absences (Least Days Present)
+        // Create a lookup for days present
+        const daysPresentMap = {};
+        if (attendanceData.employeeStats) {
+          attendanceData.employeeStats.forEach(stat => {
+            daysPresentMap[stat._id] = stat.daysPresent;
+          });
+        }
+
+        // Sort ascending (0 days present = most absent)
+        result.sort((a, b) => {
+          const daysA = daysPresentMap[a._id] || 0;
+          const daysB = daysPresentMap[b._id] || 0;
+          return daysA - daysB;
+        });
+      }
     }
 
-    const query = searchQuery.toLowerCase();
-    const filtered = employees.filter(employee =>
-      (employee.name && employee.name.toLowerCase().includes(query)) ||
-      (employee.email && employee.email.toLowerCase().includes(query)) ||
-      (employee.employeeId && employee.employeeId.toLowerCase().includes(query)) ||
-      (employee.department && employee.department.toLowerCase().includes(query)) ||
-      (employee.designation && employee.designation.toLowerCase().includes(query))
-    );
-    setFilteredEmployees(filtered);
+    // 2. Apply Search Query
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      result = result.filter(employee =>
+        (employee.name && employee.name.toLowerCase().includes(query)) ||
+        (employee.email && employee.email.toLowerCase().includes(query)) ||
+        (employee.employeeId && employee.employeeId.toLowerCase().includes(query)) ||
+        (employee.department && employee.department.toLowerCase().includes(query)) ||
+        (employee.designation && employee.designation.toLowerCase().includes(query))
+      );
+    }
+
+    setFilteredEmployees(result);
   };
 
   const handleEmployeeCreated = () => {
@@ -101,7 +156,23 @@ const EmployeeList = () => {
       <div className="page-header">
         <div className="header-content">
           <h1 className="page-title">Employee Management</h1>
-          <p className="employee-count">{filteredEmployees.length} employees found</p>
+          <div className="header-stats-row">
+            <p className="employee-count">{filteredEmployees.length} employees found</p>
+            {activeFilter !== 'all' && (
+              <div className="active-filter-badge">
+                <span>
+                  Filtering by: <strong>{activeFilter === 'present' ? 'Present Today' : 'Absent Today'}</strong>
+                </span>
+                <button
+                  className="btn-clear-filter"
+                  onClick={() => setActiveFilter('all')}
+                  title="Clear Filter"
+                >
+                  ✕
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="header-controls">
