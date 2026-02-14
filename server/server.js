@@ -18,7 +18,8 @@ const server = http.createServer(app);
 app.use(cors({
   origin: [
     "http://localhost:3000",
-    "https://employeemng-xokj.onrender.com/"
+    "https://employeemng-xokj.onrender.com/",
+    process.env.CLIENT_URL
   ],
   credentials: true
 })); app.use(express.json());

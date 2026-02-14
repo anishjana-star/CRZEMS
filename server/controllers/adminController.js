@@ -1,4 +1,5 @@
 import path from 'path';
+// this is for the testing
 import fs from 'fs';
 import PDFDocument from 'pdfkit';
 import { sendEmail } from '../utils/email.js';
@@ -21,7 +22,7 @@ const createEmployee = async (req, res) => {
 
     // Send Welcome Email
     try {
-      const dashboardUrl = 'http://localhost:3000'; // Or process.env.CLIENT_URL
+      const dashboardUrl = process.env.CLIENT_URL || 'http://localhost:3000'; // Or process.env.CLIENT_URL
       const subject = 'Welcome to Our Team! - Login Credentials';
       const text = `Dear ${employee.name},\n\nCongratulations and welcome to the team! We are thrilled to have you join us at CRZ ACADEMIC REVIEW PVT LTD.\n\nTo get you started, here are your login credentials for the employee portal:\n\nDashboard URL: ${dashboardUrl}\n\nUser ID (Email): ${employee.email}\n\nTemporary Password: ${employee.password}\n\n⚠️ For security reasons, we highly recommend that you change your password immediately after your first login.\n\nIf you have any questions or need assistance, please feel free to reach out to the HR department or your manager.\n\nWe look forward to working with you!\n\nBest regards,\nCRZ Management Team`;
 
@@ -488,7 +489,7 @@ const paySalary = async (req, res) => {
     const user = await User.findById(employeeId);
     if (user && user.email) {
       try {
-        const dashboardUrl = 'http://localhost:3000'; // Or process.env.CLIENT_URL
+        const dashboardUrl = process.env.CLIENT_URL || 'http://localhost:3000'; // Or process.env.CLIENT_URL
         const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         const monthYear = `${monthNames[month - 1]} ${year}`;
         const subject = `Salary Slip - ${monthYear}`;

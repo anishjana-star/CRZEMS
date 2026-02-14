@@ -1,11 +1,11 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || (process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api');
 
 /**
  * Make API request with authentication
  */
 const apiRequest = async (endpoint, options = {}) => {
   const token = localStorage.getItem('token');
-  
+
   const config = {
     headers: {
       'Content-Type': 'application/json',
