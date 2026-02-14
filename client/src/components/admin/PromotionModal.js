@@ -3,8 +3,13 @@ import './PromotionModal.css';
 
 const PromotionModal = ({ employee, onClose, onPromote }) => {
     const [designation, setDesignation] = useState(employee.designation || '');
+    const [remarks, setRemarks] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+
+    // 👈 NEW: Autocomplete State
+    const [filteredOptions, setFilteredOptions] = useState([]);
+    const [showSuggestions, setShowSuggestions] = useState(false);
 
     // 👈 NEW: Promotion paths based on current designation
     const getPromotionOptions = (currentDesignation) => {
@@ -55,11 +60,38 @@ const PromotionModal = ({ employee, onClose, onPromote }) => {
         ];
     };
 
+    const promotionOptions = getPromotionOptions(employee.designation || '');
+
+    // 👈 NEW: Handle Input Change
+    const handleInputChange = (e) => {
+        const val = e.target.value;
+        setDesignation(val);
+
+        if (val.trim()) {
+            const filtered = promotionOptions.filter(opt =>
+                opt.toLowerCase().includes(val.toLowerCase())
+            );
+            setFilteredOptions(filtered);
+            setShowSuggestions(true);
+        } else {
+            setFilteredOptions(promotionOptions); // Show all if empty? Or hide? Let's show all relevant
+            setShowSuggestions(true);
+        }
+    };
+
+    const handleSuggestionClick = (val) => {
+        setDesignation(val);
+        setShowSuggestions(false);
+    };
+
     // 👈 NEW: Set first promotion option automatically
     useEffect(() => {
         if (employee.designation && !designation) {
             const options = getPromotionOptions(employee.designation);
             setDesignation(options[0] || '');
+            setFilteredOptions(options);
+        } else if (!designation && promotionOptions.length > 0) {
+            setFilteredOptions(promotionOptions);
         }
     }, [employee.designation]);
 
@@ -74,15 +106,13 @@ const PromotionModal = ({ employee, onClose, onPromote }) => {
         setError('');
 
         try {
-            await onPromote(employee._id, designation);
+            await onPromote(employee._id, designation, remarks);
             onClose();
         } catch (err) {
             setError(err.message || 'Failed to promote employee');
             setLoading(false);
         }
     };
-
-    const promotionOptions = getPromotionOptions(employee.designation || '');
 
     return (
         <div className="modal-overlay" onClick={onClose}>
@@ -104,21 +134,40 @@ const PromotionModal = ({ employee, onClose, onPromote }) => {
                     </div>
 
                     {/* 👈 CHANGED: Input → Select with auto-options */}
-                    <div className="form-group">
+                    <div className="form-group" style={{ position: 'relative' }}>
                         <label>New Designation *</label>
-                        <select
+                        <input
+                            type="text"
                             value={designation}
-                            onChange={(e) => setDesignation(e.target.value)}
-                            className="form-select"
+                            onChange={handleInputChange}
+                            onFocus={() => setShowSuggestions(true)}
+                            onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+                            className="form-control"
                             required
                             autoFocus
-                        >
-                            {promotionOptions.map((option, index) => (
-                                <option key={index} value={option}>
-                                    {option}
-                                </option>
-                            ))}
-                        </select>
+                            placeholder="Select or Type New Designation"
+                            autoComplete="off"
+                        />
+                        {showSuggestions && filteredOptions.length > 0 && (
+                            <ul className="suggestions-list">
+                                {filteredOptions.map((option, index) => (
+                                    <li key={index} onClick={() => handleSuggestionClick(option)}>
+                                        {option}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+
+                    <div className="form-group">
+                        <label>Remarks / Promotion Message</label>
+                        <textarea
+                            value={remarks}
+                            onChange={(e) => setRemarks(e.target.value)}
+                            className="form-control"
+                            placeholder="Enter the promotion message to be displayed to the employee..."
+                            rows="3"
+                        />
                     </div>
 
                     <div className="modal-actions">

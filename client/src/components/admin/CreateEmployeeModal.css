@@ -255,3 +255,58 @@
 .modal-body::-webkit-scrollbar-thumb:hover {
   background: #1565C0;
 }
+
+/* 👈 NEW: Style inputs with datalists to look like dropdowns */
+.form-group input[name="designation"] {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%230D47A1' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 1rem center;
+  background-repeat: no-repeat;
+  background-size: 1.25em 1.25em;
+  padding-right: 2.5rem;
+}
+
+/* Suggestions List - Custom Dropdown */
+.suggestions-list {
+  position: absolute;
+  top: 100%;
+  left: 1.5rem;
+  right: 1.5rem;
+  background: white;
+  border: 1px solid #E3EAF3;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 10;
+  margin-top: 4px;
+  padding: 0;
+  list-style: none;
+}
+
+.suggestions-list li {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  color: #0D47A1;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #F5F9FF;
+  transition: background 0.2s;
+}
+
+.suggestions-list li:last-child {
+  border-bottom: none;
+}
+
+.suggestions-list li:hover {
+  background-color: #F5F9FF;
+  font-weight: 500;
+}
+
+/* Scrollbar for suggestions */
+.suggestions-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.suggestions-list::-webkit-scrollbar-thumb {
+  background: #E3EAF3;
+  border-radius: 3px;
+}

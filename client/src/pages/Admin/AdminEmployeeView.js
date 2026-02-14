@@ -124,9 +124,9 @@ const AdminEmployeeView = () => {
         }
     };
 
-    const handlePromote = async (employeeId, designation) => {
+    const handlePromote = async (employeeId, designation, remarks) => {
         try {
-            await promoteEmployee(employeeId, designation);
+            await promoteEmployee(employeeId, designation, remarks);
             setShowPromotionModal(false);
             loadData();
             showToast('Employee promoted successfully!', 'success');
@@ -166,6 +166,10 @@ const AdminEmployeeView = () => {
                         <div className="info-item">
                             <span className="label">Designation</span>
                             <span className="value">{employee.designation || 'N/A'}</span>
+                        </div>
+                        <div className="info-item">
+                            <span className="label">Employee Type</span>
+                            <span className="value">{employee.employeeType || 'Full Time'}</span>
                         </div>
                         <div className="info-item">
                             <span className="label">Salary</span>

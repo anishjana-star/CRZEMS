@@ -92,10 +92,10 @@ export const terminateEmployee = async (userId, reason) => {
   });
 };
 
-export const promoteEmployee = async (userId, designation) => {
+export const promoteEmployee = async (userId, designation, remarks) => {
   return await apiRequest(`/admin/employees/${userId}/promote`, {
     method: 'PUT',
-    body: JSON.stringify({ designation })
+    body: JSON.stringify({ designation, remarks })
   });
 };
 

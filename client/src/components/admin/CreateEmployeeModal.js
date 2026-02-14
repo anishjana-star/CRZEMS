@@ -77,12 +77,39 @@ const CreateEmployeeModal = ({ onClose, onSuccess }) => {
   const [error, setError] = useState('');
   const [createdEmployee, setCreatedEmployee] = useState(null);
 
+  // 👈 NEW: Autocomplete State
+  const [filteredDesignations, setFilteredDesignations] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
+
+    // Handle Designation Autocomplete
+    if (name === 'designation') {
+      if (value.trim()) {
+        const filtered = allDesignations.filter(d =>
+          d.toLowerCase().includes(value.toLowerCase())
+        );
+        setFilteredDesignations(filtered);
+        setShowSuggestions(true);
+      } else {
+        setFilteredDesignations([]);
+        setShowSuggestions(false);
+      }
+    }
   };
+
+  const handleSuggestionClick = (designation) => {
+    setFormData({ ...formData, designation });
+    setShowSuggestions(false);
+  };
+
+  // Close suggestions when clicking outside (handled slightly by blur or overlap, but for now simple)
+  // Check CSS for positioning
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -129,7 +156,7 @@ const CreateEmployeeModal = ({ onClose, onSuccess }) => {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h2>Create New Employee</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} autoComplete="off">
           {error && <div className="error-message">{error}</div>}
           <div className="modal-body">
             <div className="form-group">
@@ -155,7 +182,7 @@ const CreateEmployeeModal = ({ onClose, onSuccess }) => {
               />
             </div>
             <div className="form-group">
-              <label>Salary</label>
+              <label>Salary *</label>
               <input
                 type="number"
                 name="salary"
@@ -164,10 +191,11 @@ const CreateEmployeeModal = ({ onClose, onSuccess }) => {
                 placeholder="0"
                 min="0"
                 step="0.01"
+                required
               />
             </div>
             <div className="form-group">
-              <label>Work Hours (per day)</label>
+              <label>Work Hours (per day) *</label>
               <input
                 type="number"
                 name="workHours"
@@ -177,33 +205,46 @@ const CreateEmployeeModal = ({ onClose, onSuccess }) => {
                 min="0"
                 max="24"
                 step="0.5"
+                required
               />
             </div>
             <div className="form-group">
-              <label>Employee Type</label>
+              <label>Employee Type *</label>
               <select
                 name="employeeType"
                 value={formData.employeeType}
                 onChange={handleChange}
+                required
               >
                 <option value="Full Time">Full Time</option>
                 <option value="Intern">Intern</option>
                 <option value="Contract">Contract</option>
               </select>
             </div>
-            <div className="form-group">
+            <div className="form-group" style={{ position: 'relative' }}>
               <label>Designation *</label>
-              <select
+              <input
+                type="text"
                 name="designation"
                 value={formData.designation}
                 onChange={handleChange}
+                onFocus={(e) => {
+                  if (e.target.value) setShowSuggestions(true);
+                }}
+                onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+                placeholder="Select or Type Designation"
                 required
-              >
-                <option value="" disabled>Select Designation</option>
-                {allDesignations.map((role) => (
-                  <option key={role} value={role}>{role}</option>
-                ))}
-              </select>
+                autoComplete="off"
+              />
+              {showSuggestions && filteredDesignations.length > 0 && (
+                <ul className="suggestions-list">
+                  {filteredDesignations.map((role) => (
+                    <li key={role} onClick={() => handleSuggestionClick(role)}>
+                      {role}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
           <div className="modal-actions">

@@ -47,6 +47,13 @@ const userSchema = new mongoose.Schema({
     promotedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
+    },
+    promotionTitle: {
+      type: String
+    },
+    remarks: {
+      type: String,
+      default: ''
     }
   }],
   salary: {
@@ -63,16 +70,17 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-// Hash password before saving
-userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
-});
+// Hash password before saving - REMOVED for plain text storage
+// userSchema.pre('save', async function (next) {
+//   if (!this.isModified('password')) return next();
+//   this.password = await bcrypt.hash(this.password, 10);
+//   next();
+// });
 
 // Compare password method
 userSchema.methods.comparePassword = async function (candidatePassword) {
-  return await bcrypt.compare(candidatePassword, this.password);
+  // return await bcrypt.compare(candidatePassword, this.password);
+  return candidatePassword === this.password;
 };
 
 export default mongoose.model('User', userSchema);

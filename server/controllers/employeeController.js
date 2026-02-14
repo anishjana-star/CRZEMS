@@ -171,11 +171,11 @@ const getSalaryData = async (req, res) => {
     // 2. Format Promotions
     const promotions = user.promotionHistory.map((promo, index) => ({
       _id: promo._id || index,
-      title: `Promoted to ${promo.designation}`,
+      title: promo.promotionTitle || `Promoted to "${promo.designation}"`, // Use stored title or fallback
       date: promo.date,
       newSalary: user.salary, // Current salary (history not stored in simple model, using current)
       position: promo.designation,
-      reason: 'Performance Review' // Placeholder as reason isn't in model
+      reason: promo.remarks || 'Performance Review'
     })).reverse();
 
     // 3. Termination Details

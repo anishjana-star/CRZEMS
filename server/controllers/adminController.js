@@ -357,8 +357,8 @@ const terminateEmployee = async (req, res) => {
 
 const promoteEmployee = async (req, res) => {
   try {
-    const { designation } = req.body;
-    const result = await employeeService.promoteEmployee(req.params.id, designation, req.user._id);
+    const { designation, remarks } = req.body;
+    const result = await employeeService.promoteEmployee(req.params.id, designation, req.user._id, remarks);
     res.json({ message: 'Employee promoted successfully', result });
   } catch (error) {
     if (error.message === 'New designation is required' || error.message === 'User not found') {
