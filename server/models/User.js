@@ -70,28 +70,15 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-<<<<<<< HEAD
 // Hash password before saving - REMOVED for plain text
-userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
-  // this.password = await bcrypt.hash(this.password, 10); // Hashing removed
-  next();
-});
-=======
-// Hash password before saving - REMOVED for plain text storage
 // userSchema.pre('save', async function (next) {
 //   if (!this.isModified('password')) return next();
 //   this.password = await bcrypt.hash(this.password, 10);
 //   next();
 // });
->>>>>>> 8c0eb81c9b39c624468b83bee7e1a1083e5ca1f7
 
 // Compare password method - Plain text comparison
 userSchema.methods.comparePassword = async function (candidatePassword) {
-<<<<<<< HEAD
-=======
-  // return await bcrypt.compare(candidatePassword, this.password);
->>>>>>> 8c0eb81c9b39c624468b83bee7e1a1083e5ca1f7
   return candidatePassword === this.password;
 };
 
